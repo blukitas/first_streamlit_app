@@ -1,3 +1,6 @@
-import streamlit
+import streamlit as st
 
-streamlit.title("My parents new healthy dinner")
+st.title("My parents new healthy dinner")
+
+x = st.slider("Select a value")
+st.write(x, "squared is", x * x)
