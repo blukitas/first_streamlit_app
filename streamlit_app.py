@@ -21,7 +21,7 @@ st.text(" 🥑🍞 Avocato toast")
 my_fruit_list = my_fruit_list.set_index("Fruit")
 
 # Display a multiselect with fruits index
-st.multiselect("Pick some fruits:", list(my_fruit_list.index))
+selected_fruits = st.multiselect("Pick some fruits:", list(my_fruit_list.index))
 
 # Display the dataset
-st.dataframe(my_fruit_list)
+st.dataframe(my_fruit_list.loc[selected_fruits])
