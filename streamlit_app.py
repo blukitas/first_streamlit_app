@@ -18,7 +18,7 @@ st.text(" 🐔🥣 Chiken soup")
 st.text(" 🥑🍞 Avocato toast")
 
 # Change index to name
-my_fruit_list.set_index("Fruit")
+my_fruit_list = my_fruit_list.set_index("Fruit")
 
 # Display a multiselect with fruits index
 st.multiselect("Pick some fruits:", list(my_fruit_list.index))
