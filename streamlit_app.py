@@ -7,7 +7,7 @@ st.write(x, "squared is", x * x)
 
 
 st.header("Breakfast Menu")
-st.text("Eggs")
-st.text("Toast")
-st.text("Coffee")
-st.text("Milk")
+st.text(" 🥣 Soup")
+st.text(" 🥗 Kale")
+st.text(" 🐔🥣 Chiken soup")
+st.text(" 🥑🍞 Avocato toast")
