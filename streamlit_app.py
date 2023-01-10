@@ -3,13 +3,9 @@ import pandas as pd
 import requests
 import snowflake.connector
 
-# Get connection
+# Get connection from snowflake
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_data_row = my_cur.fetchone()
-st.text("Hello from Snowflake:")
-st.text(my_data_row)
 
 
 my_fruit_list = pd.read_csv(
@@ -55,3 +51,11 @@ fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 
 # Display the dataframe in streamlit
 st.dataframe(fruityvice_normalized)
+
+# Get fruits
+my_cur.execute("SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_list;")
+my_list_of_fruits = my_cur.fetchall()
+
+# Fruit list from snowflake
+st.header("The list of fruits contains:")
+st.dataframe(my_list_of_fruits)
