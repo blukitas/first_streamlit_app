@@ -82,5 +82,5 @@ except URLError as e:
 # Fruit list from snowflake
 st.header("The list of fruits contains:")
 if st.button("Click to load information"):
-    my_list_of_fruits = get_fruit_information()
+    my_list_of_fruits = get_fruit_list()
     st.dataframe(my_list_of_fruits)
