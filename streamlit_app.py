@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 my_fruit_list = pd.read_csv(
     "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
@@ -27,3 +28,6 @@ selected_fruits = st.multiselect(
 
 # Display the dataset
 st.dataframe(my_fruit_list.loc[selected_fruits])
+
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
