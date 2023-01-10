@@ -9,6 +9,15 @@ my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 
 
+def get_fruit_information(fruit_choice):
+    # Info from fruity vice
+    fruityvice_response = requests.get(
+        "https://fruityvice.com/api/fruit/" + fruit_choice
+    )
+    # normalize json into a dataframe
+    return pd.json_normalize(fruityvice_response.json())
+
+
 my_fruit_list = pd.read_csv(
     "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
 )
@@ -49,12 +58,8 @@ try:
     if not fruit_choice:
         st.error("Please select a fruit to get information")
     else:
-        # Info from fruity vice
-        fruityvice_response = requests.get(
-            "https://fruityvice.com/api/fruit/" + fruit_choice
-        )
-        # normalize json into a dataframe
-        fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+        # Get and normalize data from fruit
+        fruityvice_normalized = get_fruit_information(fruit_choice)
         # Display the dataframe in streamlit
         st.dataframe(fruityvice_normalized)
 
