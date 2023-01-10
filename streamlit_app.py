@@ -63,7 +63,7 @@ my_cur.execute("SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_l
 my_list_of_fruits = list(my_cur.fetchall())
 
 if add_button:
-    my_list_of_fruits.append(fruit_choice)
+    my_list_of_fruits.append("".join(fruit_choice))
 
 # Fruit list from snowflake
 st.header("The list of fruits contains:")
