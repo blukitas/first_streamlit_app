@@ -43,7 +43,7 @@ container1 = st.container()
 fruit_choice = container1.text_input(
     "What fruit would you like information about?", "Kiwi"
 )
-container1.write("The user entered ", fruit_choice)
+st.write("The user entered ", fruit_choice)
 container2 = st.container()
 add_button = container2.button("add")
 
