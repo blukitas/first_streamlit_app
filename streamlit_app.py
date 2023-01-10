@@ -35,3 +35,9 @@ st.header("Fruityvice Fruit Advice!")
 # Info from fruity vice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 st.text(fruityvice_response.json())
+
+# normalize json into a dataframe
+fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+
+# Display the dataframe in streamlit
+st.dataframe(fruityvice_normalized)
