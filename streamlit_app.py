@@ -29,5 +29,9 @@ selected_fruits = st.multiselect(
 # Display the dataset
 st.dataframe(my_fruit_list.loc[selected_fruits])
 
+# New header
+st.header("Fruityvice Fruit Advice!")
+
+# Info from fruity vice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response)
+st.text(fruityvice_response.json())
