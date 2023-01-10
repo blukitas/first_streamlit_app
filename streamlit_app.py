@@ -39,12 +39,12 @@ st.dataframe(my_fruit_list.loc[selected_fruits])
 st.header("Fruityvice Fruit Advice!")
 
 # Pick some fruit + add button
-container1 = st.beta_container()
+container1 = st.container()
 fruit_choice = container1.text_input(
     "What fruit would you like information about?", "Kiwi"
 )
 container1.write("The user entered ", fruit_choice)
-container2 = st.beta_container()
+container2 = st.container()
 add_button = container2.button("add")
 
 
