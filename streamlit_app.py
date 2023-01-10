@@ -6,7 +6,6 @@ from urllib.error import URLError
 
 # Get connection from snowflake
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = 
 
 
 def get_fruit_information(fruit_choice):
@@ -17,12 +16,16 @@ def get_fruit_information(fruit_choice):
     # normalize json into a dataframe
     return pd.json_normalize(fruityvice_response.json())
 
+
 def get_fruit_list():
     with my_cnx.cursor() as my_cur:
         # Get fruits
-        my_cur.execute("SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_list;")
+        my_cur.execute(
+            "SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_list;"
+        )
         my_list_of_fruits = list(my_cur.fetchall())
         return my_list_of_fruits
+
 
 my_fruit_list = pd.read_csv(
     "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
@@ -78,6 +81,6 @@ except URLError as e:
 
 # Fruit list from snowflake
 st.header("The list of fruits contains:")
-if st.button('Click to load information'):
+if st.button("Click to load information"):
     my_list_of_fruits = get_fruit_information()
     st.dataframe(my_list_of_fruits)
