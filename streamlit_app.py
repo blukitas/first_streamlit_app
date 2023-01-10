@@ -4,8 +4,16 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
-# Get connection from snowflake
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+def insert_to_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        # Get fruits
+        my_cur.execute(
+            "insert into pc_rivery_db.public.fruit_load_list VALUES ('"
+            + new_fruit
+            + "');"
+        )
+        return "Thanks for adding " + new_fruit
 
 
 def get_fruit_information(fruit_choice):
@@ -63,12 +71,25 @@ try:
         "What fruit would you like information about?", "Kiwi"
     )
     container2 = st.container()
-    add_button = container2.button("add")
+
+    if container2.button("add fruit to list"):
+        # Get connection from snowflake
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+        # Insert
+        result = insert_to_snowflake(fruit_choice)
+        # Close
+        my_cnx.close()
+        st.text(result)
+
     if not fruit_choice:
         st.error("Please select a fruit to get information")
     else:
+        # Get connection from snowflake
+        my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
         # Get and normalize data from fruit
         fruityvice_normalized = get_fruit_information(fruit_choice)
+        # Close
+        my_cnx.close()
         # Display the dataframe in streamlit
         st.dataframe(fruityvice_normalized)
 
