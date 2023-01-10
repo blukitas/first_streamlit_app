@@ -60,7 +60,7 @@ st.dataframe(fruityvice_normalized)
 
 # Get fruits
 my_cur.execute("SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_list;")
-my_list_of_fruits = my_cur.fetchall()
+my_list_of_fruits = list(my_cur.fetchall())
 
 if add_button:
     my_list_of_fruits.append(fruit_choice)
