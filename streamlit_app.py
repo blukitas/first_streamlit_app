@@ -38,9 +38,15 @@ st.dataframe(my_fruit_list.loc[selected_fruits])
 # New header
 st.header("Fruityvice Fruit Advice!")
 
-# Pick some fruit
-fruit_choice = st.text_input("What fruit would you like information about?", "Kiwi")
-st.write("The user entered ", fruit_choice)
+# Pick some fruit + add button
+container1 = st.beta_container()
+fruit_choice = container1.text_input(
+    "What fruit would you like information about?", "Kiwi"
+)
+container1.write("The user entered ", fruit_choice)
+container2 = st.beta_container()
+add_button = container2.button("add")
+
 
 # Info from fruity vice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
@@ -55,6 +61,9 @@ st.dataframe(fruityvice_normalized)
 # Get fruits
 my_cur.execute("SELECT fruit_name as fruit from pc_rivery_db.public.fruit_load_list;")
 my_list_of_fruits = my_cur.fetchall()
+
+if add_button:
+    my_list_of_fruits.append(fruit_choice)
 
 # Fruit list from snowflake
 st.header("The list of fruits contains:")
